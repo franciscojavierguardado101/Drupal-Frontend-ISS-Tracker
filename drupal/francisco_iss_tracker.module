@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Francisco ISS Tracker module.
+ *
+ * Provides the iss_tracker paragraph type which renders a live International
+ * Space Station tracker via the Next.js frontend. Position is polled every
+ * 5 seconds from wheretheiss.at with no API key required.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function francisco_iss_tracker_help(string $route_name, RouteMatchInterface $route_match): string {
+  if ($route_name === 'help.page.francisco_iss_tracker') {
+    return '<p>' . t(
+      'Provides the <strong>ISS Tracker</strong> paragraph type. Add it to any page via the paragraph field to embed a live map of the International Space Station, ground track, footprint circle, and crew list with Wikipedia bios. No API key required.'
+    ) . '</p>';
+  }
+  return '';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function francisco_iss_tracker_theme(): array {
+  return [
+    'paragraph__iss_tracker' => [
+      'base hook' => 'paragraph',
+    ],
+  ];
+}
